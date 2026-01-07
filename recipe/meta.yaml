@@ -17,28 +17,7 @@ source:
 build:
   number: {{ build }}
   skip: true  # [win]
-  script: 
-    - mkdir -p $PREFIX/bin
-    - mkdir -p $PREFIX/lib
-    - mkdir -p $PREFIX/include
-    - mkdir -p bin
-    - export PREFIX="${PREFIX}"
-    - echo $CFLAGS
-    - echo $FFLAGS
-    - echo "CC=$CC"
-    - echo "FC=$FC"
-    - if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" ]]; then export OPAL_PREFIX="${PREFIX}"; fi
-    - make PREFIX="${PREFIX}" \
-        FC_OPTS="-g -O3 -fdefault-real-8 -fdefault-double-8 -fopenmp -ffree-form" \
-        CC_OPTS="-O -std=c99" \
-        LDF="-L${PREFIX}/lib -lHYPRE -ljsonfortran -lhdf5hl_fortran -lhdf5_fortran -lhdf5_hl -lhdf5 -lz"
-    - cp ./bin/qpad.e $PREFIX/bin/
-    - make clean
-    - make PREFIX="${PREFIX}" IF_OPENPMD=1 \
-        FC_OPTS="-g -O3 -fdefault-real-8 -fdefault-double-8 -fopenmp -ffree-form" \
-        CC_OPTS="-O -std=c99" \
-        LDF="-L${PREFIX}/lib -lHYPRE -ljsonfortran -lhdf5hl_fortran -lhdf5_fortran -lhdf5_hl -lhdf5 -lz"
-    - cp ./bin/qpad.e $PREFIX/bin/qpad-pmd.e
+  script: bash build.sh
     
 requirements:
   build:

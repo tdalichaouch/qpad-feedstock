@@ -17,7 +17,6 @@ source:
 build:
   number: {{ build }}
   skip: true  # [win]
-  script: bash build.sh
     
 requirements:
   build:

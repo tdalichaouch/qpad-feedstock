@@ -46,9 +46,11 @@ requirements:
     - zlib
     - libgomp      # [linux]
     - llvm-openmp  # [osx]
+    - libgcc   # [osx]
 
   run:
     - llvm-openmp  # [osx]
+    - libgcc   # [osx]
     
 
 test:
